@@ -1,2 +1,31 @@
+modules = ["python-with-prybar-3.10", "python-base-3.12"]
 [nix]
 channel = "stable-24_05"
+packages = ["python311Packages.flask", "python312Packages.flask"]
+
+[workflows]
+
+[[workflows.workflow]]
+name = "Start React App"
+mode = "sequential"
+author = 43582081
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python app.py"
+
+[[workflows.workflow]]
+name = "abc"
+mode = "sequential"
+author = 43582081
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[ports]]
+localPort = 1
+externalPort = 3000
+
+[[ports]]
+localPort = 8080
+externalPort = 80
